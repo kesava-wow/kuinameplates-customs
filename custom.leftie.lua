@@ -20,30 +20,30 @@ function mod:PostShow(msg, frame)
         frame.name:SetPoint('RIGHT', frame.health.p, 'LEFT')
 
         if frame.level.enabled then
-          frame.level:ClearAllPoints()
-          frame.level:SetPoint('TOPLEFT', frame.health, 'BOTTOMLEFT', 2.5, 5)
-          frame.level:SetJustifyH('LEFT')
+            frame.level:ClearAllPoints()
+            frame.level:SetPoint('TOPLEFT', frame.health, 'BOTTOMLEFT', 2.5, 5)
+            frame.level:SetJustifyH('LEFT')
         end
 
         if frame.health.mo then
-          frame.health.mo:ClearAllPoints()
-          frame.health.mo:SetPoint('TOPRIGHT', frame.health, 'BOTTOMRIGHT', -2.5, 5)
-          frame.health.mo:SetJustifyH('RIGHT')
+            frame.health.mo:ClearAllPoints()
+            frame.health.mo:SetPoint('TOPRIGHT', frame.health, 'BOTTOMRIGHT', -2.5, 5)
+            frame.health.mo:SetJustifyH('RIGHT')
         end
 
         if frame.castbar.name then
-          frame.castbar.name:ClearAllPoints()
-          frame.castbar.name:SetPoint('TOPLEFT', frame.castbar.bar, 'BOTTOMLEFT', 2.5, -3)
-          frame.castbar.name:SetPoint('TOPRIGHT', frame.castbar.bar, 'BOTTOMRIGHT')
-          frame.castbar.name:SetJustifyH('LEFT')
+            frame.castbar.name:ClearAllPoints()
+            frame.castbar.name:SetPoint('TOPLEFT', frame.castbar.bar, 'BOTTOMLEFT', 2.5, -3)
+            frame.castbar.name:SetPoint('TOPRIGHT', frame.castbar.bar, 'BOTTOMRIGHT')
+            frame.castbar.name:SetJustifyH('LEFT')
         end
 
         if frame.castbar.curr then
-          frame.castbar.curr:ClearAllPoints()
-          frame.castbar.curr:SetPoint('TOPRIGHT', frame.castbar.bar, 'BOTTOMRIGHT', -2.5, -3)
-          frame.castbar.curr:SetJustifyH('RIGHT')
+            frame.castbar.curr:ClearAllPoints()
+            frame.castbar.curr:SetPoint('TOPRIGHT', frame.castbar.bar, 'BOTTOMRIGHT', -2.5, -3)
+            frame.castbar.curr:SetJustifyH('RIGHT')
 
-          frame.castbar.name:SetPoint('RIGHT', frame.castbar.curr, 'LEFT')
+            frame.castbar.name:SetPoint('RIGHT', frame.castbar.curr, 'LEFT')
         end
     end
 end
