@@ -1,0 +1,31 @@
+diff --git a/Kui_Nameplates/create.lua b/Kui_Nameplates/create.lua
+index 86a7787..ffb335a 100644
+--- a/Kui_Nameplates/create.lua
++++ b/Kui_Nameplates/create.lua
+@@ -55,6 +55,12 @@ function addon:CreateHealthBar(frame, f)
+     f.health = CreateFrame('StatusBar', nil, f.parent)
+     f.health:SetStatusBarTexture(addon.bartexture)
+ 
++    f.health.bg = CreateFrame('StatusBar', nil, f.parent)
++    f.health.bg:SetStatusBarTexture(addon.bartexture)
++    f.health.bg:SetAllPoints(f.health)
++
++    f.health:SetFrameLevel(f.health.bg:GetFrameLevel()+1)
++
+     if self.SetValueSmooth then
+         -- smooth bar
+         f.health.OrigSetValue = f.health.SetValue
+diff --git a/Kui_Nameplates/layout.lua b/Kui_Nameplates/layout.lua
+index fbd4be8..40a73f6 100644
+--- a/Kui_Nameplates/layout.lua
++++ b/Kui_Nameplates/layout.lua
+@@ -90,7 +90,8 @@ local function SetHealthColour(self)
+             self.player = true
+         end
+ 
+-        self.health:SetStatusBarColor(r, g, b)
++        self.health.bg:SetStatusBarColor(r, g, b)
++        self.health:SetStatusBarColor(0,0,0,.75)
+     end
+ end
+ 
