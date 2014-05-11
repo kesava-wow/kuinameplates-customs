@@ -12,9 +12,9 @@ local units = {
 }
 
 function mod:PostShow(msg, frame)
-    local mycol = units[frame.name:GetText()]
-    if mycol then
-        frame.health:SetStatusBarColor(unpack(mycol))
-    end
+	local mycol = units[frame.name.text]
+	if mycol then
+		frame:SetHealthColour(true, unpack(mycol))
+	end
 end
 mod:RegisterMessage('KuiNameplates_PostShow', 'PostShow')
