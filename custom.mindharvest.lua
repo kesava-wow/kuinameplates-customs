@@ -42,11 +42,11 @@ function mod:CreateNotifier(msg, frame)
     mh:SetDrawLayer('ARTWORK',2)
 
     mh:SetTexture('Interface\\AddOns\\Kui_Nameplates\\media\\combopoint-round')
-    mh:SetSize(7,7)
-    mh:SetVertexColor(.8,0,.8)
+    mh:SetSize(9,9)
+    mh:SetVertexColor(1,.4,1)
     mh:Hide()
 
-    mh:SetPoint('LEFT', frame.overlay, 'RIGHT', -3, 0)
+    mh:SetPoint('LEFT', frame.overlay, 'RIGHT', 2, 0)
 end
 
 function mod:HideNotifier(msg, frame)
@@ -54,6 +54,7 @@ function mod:HideNotifier(msg, frame)
 end
 
 function mod:GUIDStored(msg, f, unit)
+    if f.friend then return end
     if not MIND_HARVEST_USED[f.guid] then
         f.mindharvest:Show()
     end
