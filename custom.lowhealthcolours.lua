@@ -4,11 +4,12 @@
 --
 -- changes colour of health bars based on health percentage
 ]]
-local kn = LibStub('AceAddon-3.0'):GetAddon('KuiNameplates')
-local mod = kn:NewModule('LowHealthColours', 'AceEvent-3.0')
+local addon = LibStub('AceAddon-3.0'):GetAddon('KuiNameplates')
+local mod = addon:NewModule('LowHealthColours', 'AceEvent-3.0')
 
-local LOW_HEALTH_COLOR = { 1, .3, .5 }
-local PRIORITY = 5 -- set above 10 to override tank mode colour
+mod.uiName = 'Low health colour'
+
+local LOW_HEALTH_COLOR, PRIORITY
 
 local function OnHealthValueChanged(oldHealth,current)
     local frame = oldHealth:GetParent():GetParent().kui
@@ -23,9 +24,16 @@ local function OnHealthValueChanged(oldHealth,current)
     end
 end
 
----------------------------------------------------------------------- Create --
 function mod:PostCreate(msg, frame)
     frame.oldHealth:HookScript('OnValueChanged',OnHealthValueChanged)
+end
+
+mod.configChangedFuncs = { runOnce = {} }
+mod.configChangedFuncs.runOnce.colour = function(v)
+    LOW_HEALTH_COLOR = v
+end
+mod.configChangedFuncs.runOnce.priority = function(v)
+    PRIORITY = v and 15 or 5
 end
 
 function mod:GetOptions()
@@ -36,6 +44,18 @@ function mod:GetOptions()
             type = 'toggle',
             width = 'double',
             order = 10
+        },
+        priority = {
+            name = 'Override tank mode',
+            desc = 'When using tank mode, allow the low health colour to override tank mode colouring',
+            type = 'toggle',
+            order = 20
+        },
+        colour = {
+            name = 'Low health colour',
+            desc = 'The colour to use',
+            type = 'color',
+            order = 30
         }
     }
 end
@@ -43,11 +63,17 @@ end
 function mod:OnInitialize()
     self.db = addon.db:RegisterNamespace(self.moduleName, {
         profile = {
-            enabled = true
+            enabled = true,
+            priority = false,
+            colour = { 1, 1, .85 }
         }
     })
 
     addon:InitModuleOptions(self)
+
+    LOW_HEALTH_COLOR = self.db.profile.colour
+    PRIORITY = self.db.profile.priority and 15 or 5
+
     self:SetEnabledState(self.db.profile.enabled)
 end
 
@@ -57,3 +83,4 @@ end
 function mod:OnDisable()
     self:UnregisterMessage('KuiNameplates_PostCreate', 'PostCreate')
 end
+
