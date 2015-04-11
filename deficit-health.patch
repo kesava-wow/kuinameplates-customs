@@ -1,8 +1,8 @@
 diff --git a/Kui_Nameplates/create.lua b/Kui_Nameplates/create.lua
-index 79747cd..3efc0f2 100644
+index 846949b..39fbfa1 100644
 --- a/Kui_Nameplates/create.lua
 +++ b/Kui_Nameplates/create.lua
-@@ -60,6 +60,12 @@ function addon:CreateHealthBar(frame, f)
+@@ -54,6 +54,12 @@ function addon:CreateHealthBar(frame, f)
      f.health:SetStatusBarTexture(addon.bartexture)
  	f.health.percent = 100
  
@@ -16,10 +16,10 @@ index 79747cd..3efc0f2 100644
          -- smooth bar
          f.health.OrigSetValue = f.health.SetValue
 diff --git a/Kui_Nameplates/layout.lua b/Kui_Nameplates/layout.lua
-index 4c077c0..b2ca271 100644
+index 78a68f2..d933b9d 100644
 --- a/Kui_Nameplates/layout.lua
 +++ b/Kui_Nameplates/layout.lua
-@@ -94,7 +94,8 @@ local function SetHealthColour(self,sticky,r,g,b)
+@@ -105,7 +105,8 @@ local function SetHealthColour(self,sticky,r,g,b)
              self.player = true
          end
  
