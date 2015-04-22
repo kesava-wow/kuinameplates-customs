@@ -1,0 +1,36 @@
+--[[
+-- Kui_Nameplates
+-- By Kesava at curse.com
+-- All rights reserved
+
+   Some examples of simple modifications can be found at the following URL:
+   https://github.com/kesava-wow/kuinameplates-customs
+]]
+local kn = LibStub('AceAddon-3.0'):GetAddon('KuiNameplates')
+local mod = kn:NewModule('CustomInjector', 'AceEvent-3.0')
+
+---------------------------------------------------------------------- Create --
+function mod:PostCreate(msg, frame)
+	-- Place code to be performed after a frame is created here.
+end
+
+------------------------------------------------------------------------ Show --
+function mod:PostShow(msg, frame)
+	-- Place code to be performed after a frame is shown here.
+end
+
+------------------------------------------------------------------------ Hide --
+function mod:PostHide(msg, frame)
+	-- Place code to be performed after a frame is hidden here.
+end
+
+---------------------------------------------------------------------- Target --
+function mod:PostTarget(msg, frame)
+	-- Place code to be performed when a frame becomes the player's target here.
+end
+
+-------------------------------------------------------------------- Register --
+mod:RegisterMessage('KuiNameplates_PostCreate', 'PostCreate')
+mod:RegisterMessage('KuiNameplates_PostShow', 'PostShow')
+mod:RegisterMessage('KuiNameplates_PostHide', 'PostHide')
+mod:RegisterMessage('KuiNameplates_PostTarget', 'PostTarget')
