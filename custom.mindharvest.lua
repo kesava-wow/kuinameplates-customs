@@ -78,7 +78,7 @@ function mod:HideNotifier(msg, frame)
     frame.mindharvest:Hide()
 end
 
-function mod:GUIDStored(msg, f, unit)
+function mod:GUIDStored(msg, f)
     if f.friend then return end
     if MIND_HARVEST_KNOWN and not MIND_HARVEST_USED[f.guid] then
         f.mindharvest:Show()
@@ -90,6 +90,7 @@ function mod:OnInitialize()
         self:RegisterMessage('KuiNameplates_PostCreate', 'CreateNotifier')
         self:RegisterMessage('KuiNameplates_PostHide', 'HideNotifier')
         self:RegisterMessage('KuiNameplates_GUIDStored', 'GUIDStored')
+        self:RegisterMessage('KuiNameplates_GUIDAssumed', 'GUIDStored')
 
         self:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
         self:RegisterEvent('PLAYER_ENTERING_WORLD')
