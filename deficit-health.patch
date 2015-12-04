@@ -1,10 +1,10 @@
 diff --git a/Kui_Nameplates/create.lua b/Kui_Nameplates/create.lua
-index 846949b..39fbfa1 100644
+index f8a5482..c44841c 100644
 --- a/Kui_Nameplates/create.lua
 +++ b/Kui_Nameplates/create.lua
-@@ -54,6 +54,12 @@ function addon:CreateHealthBar(frame, f)
-     f.health:SetStatusBarTexture(addon.bartexture)
- 	f.health.percent = 100
+@@ -93,6 +93,12 @@ function addon:CreateHealthBar(frame, f)
+ 
+     f.health:GetStatusBarTexture():SetDrawLayer('ARTWORK',-8)
  
 +    f.health.bg = CreateFrame('StatusBar',nil,f)
 +    f.health.bg:SetStatusBarTexture(addon.bartexture)
@@ -16,16 +16,46 @@ index 846949b..39fbfa1 100644
          -- smooth bar
          f.health.OrigSetValue = f.health.SetValue
 diff --git a/Kui_Nameplates/layout.lua b/Kui_Nameplates/layout.lua
-index 78a68f2..d933b9d 100644
+index f04bf83..d442d00 100644
 --- a/Kui_Nameplates/layout.lua
 +++ b/Kui_Nameplates/layout.lua
-@@ -105,7 +105,8 @@ local function SetHealthColour(self,sticky,r,g,b)
+@@ -70,7 +70,8 @@ local function SetHealthColour(self,sticky,r,g,b)
+         if  not self.healthColourPriority or
+             sticky >= self.healthColourPriority
+         then
+-            self.health:SetStatusBarColor(r,g,b)
++            self.health.bg:SetStatusBarColor(r, g, b)
++            self.health:SetStatusBarColor(0,0,0,.7)
+             self.healthColourPriority = sticky
+         end
+         return
+@@ -115,7 +116,8 @@ local function SetHealthColour(self,sticky,r,g,b)
              self.player = true
          end
  
 -        self.health:SetStatusBarColor(r, g, b)
-+        self.health.bg:SetStatusBarColor(r,g,b)
-+        self.health:SetStatusBarColor(0,0,0,.8)
++        self.health.bg:SetStatusBarColor(r, g, b)
++        self.health:SetStatusBarColor(0,0,0,.7)
      end
  end
  
+diff --git a/Kui_Nameplates/modules/nameonly.lua b/Kui_Nameplates/modules/nameonly.lua
+index 62a4f1e..8fbd047 100644
+--- a/Kui_Nameplates/modules/nameonly.lua
++++ b/Kui_Nameplates/modules/nameonly.lua
+@@ -69,6 +69,7 @@ local function SwitchOn(f)
+         f.incWarning:SetParent(f)
+     end
+ 
++    f.health.bg:Hide()
+     f.health:Hide()
+     f.overlay:Hide()
+     f.bg:Hide()
+@@ -91,6 +92,7 @@ local function SwitchOff(f)
+     })
+     f.name:SetParent(f.overlay)
+ 
++    f.health.bg:Show()
+     f.health:Show()
+     f.overlay:Show()
+     f.bg:Show()
