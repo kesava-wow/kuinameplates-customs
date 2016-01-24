@@ -15,8 +15,8 @@
 -- :UpdateFrame script, or hook OnUpdate as normal.
 -- (as per layout.lua, addon:InitFrame)
 --]]
-local kn = LibStub('AceAddon-3.0'):GetAddon('KuiNameplates')
-local mod = kn:NewModule('CustomInjector', 'AceEvent-3.0')
+local addon = LibStub('AceAddon-3.0'):GetAddon('KuiNameplates')
+local mod = addon:NewModule('CustomInjector', addon.Prototype, 'AceEvent-3.0')
 ---------------------------------------------------------------------- Create --
 function mod:PostCreate(msg, frame)
     -- Place code to be performed after a frame is created here.
