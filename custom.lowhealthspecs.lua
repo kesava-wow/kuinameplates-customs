@@ -22,5 +22,5 @@ function mod:Update()
 end
 function mod:OnInitialize()
     self:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED', 'Update')
-    self:RegisterEvent('PLAYER_ENTERING_WORLD', 'Update')
+    self:RegisterEvent('PLAYER_LOGIN', 'Update')
 end
