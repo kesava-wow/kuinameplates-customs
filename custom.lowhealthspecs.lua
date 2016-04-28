@@ -7,7 +7,10 @@ local low_health_specs = {
 local low_health_default = 20
 
 function mod:Update()
-    local spec = GetSpecializationInfo(GetSpecialization())
+    local spec_index = GetSpecialization()
+    if not spec_index then return end
+    local spec = GetSpecializationInfo(spec_index)
+    if not spec then return end
 
     if low_health_specs[spec] then
         addon.db.profile.general.lowhealthval = low_health_specs[spec]
@@ -19,5 +22,5 @@ function mod:Update()
 end
 function mod:OnInitialize()
     self:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED', 'Update')
-    self:Update()
+    self:RegisterEvent('PLAYER_ENTERING_WORLD', 'Update')
 end
