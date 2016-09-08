@@ -1,7 +1,7 @@
-## Interface: 60200
+## Interface: 70000
 ## Author: Kesava
 ## Title: Kui |cff9966ffNameplates|r Custom Injector
-## Notes: Custom code injector for Kui Nameplates.
-## Dependencies: Kui_Nameplates
+## Notes: Custom code injector for Kui Nameplates Core.
+## Dependencies: Kui_Nameplates_Core
 
 custom.lua
