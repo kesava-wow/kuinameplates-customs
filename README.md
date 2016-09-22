@@ -2,6 +2,11 @@ Kui_Nameplates_Customs
 ======================
 A collection of custom.lua scripts and patches for Kui_Nameplates_Core.
 
+Notable files
+-------------
+
+* [Detection icon](https://raw.githubusercontent.com/kesava-wow/kuinameplates-customs/master/custom.detection-icon.lua) - adds an icon to mobs in Suramar which can remove your Masquerade buff (and one in Highmountain who has it for some reason)
+
 How do I use this?
 ------------------
 
@@ -18,7 +23,3 @@ Note that if you want to use more than one of these modifications at a time, you
 ### If you do know LUA
 Just install the Custom module and modify the custom.lua file as you require. Example modifications are available both here and in the main repo (BarAuras, PreLegion, and of course all the built-in modules). The ClassPowers and Auras modules have commented documentation at the top of their files.
 
-Notable files
--------------
-
-* [Detection icon](https://raw.githubusercontent.com/kesava-wow/kuinameplates-customs/master/custom.detection-icon.lua) - adds an icon to mobs in Suramar which can remove your Masquerade buff.
