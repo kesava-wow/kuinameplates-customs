@@ -42,9 +42,12 @@ function mod:NameUpdate(frame)
         end
     end
 end
+function mod:UNIT_NAME_UPDATE(event,frame)
+    self:NameUpdate(frame)
+end
 -- initialise ##################################################################
 function mod:Initialise()
     self:RegisterMessage('Show','NameUpdate')
     self:RegisterMessage('HealthColourChange','NameUpdate')
-    self:RegisterEvent('UNIT_NAME_UPDATE','NameUpdate')
+    self:RegisterEvent('UNIT_NAME_UPDATE')
 end
