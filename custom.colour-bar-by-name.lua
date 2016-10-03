@@ -49,5 +49,5 @@ end
 function mod:Initialise()
     self:RegisterMessage('Show','NameUpdate')
     self:RegisterMessage('HealthColourChange','NameUpdate')
-    self:RegisterEvent('UNIT_NAME_UPDATE')
+    self:RegisterUnitEvent('UNIT_NAME_UPDATE')
 end
