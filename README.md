@@ -7,6 +7,7 @@ Notable files
 
 * [Detection icon](https://raw.githubusercontent.com/kesava-wow/kuinameplates-customs/master/custom.detection-icon.lua) - adds an icon to mobs in Suramar which can remove your Masquerade buff (and one in Highmountain who has it for some reason).
 * [Target scale](https://raw.githubusercontent.com/kesava-wow/kuinameplates-customs/master/custom.target-scale.lua) - scales up the currently targeted nameplate in a non-pixel-perfect way.
+* [Aura mods](https://raw.githubusercontent.com/kesava-wow/kuinameplates-customs/master/custom.simple-aura-mods.lua) - some configurable modifications for auras.
 
 How do I use this?
 ------------------
