@@ -5,16 +5,19 @@ local addon = KuiNameplates
 local core = KuiNameplatesCore
 local mod = addon:NewPlugin('ColourBarByName',101)
 
--- 4 = execute
--- 5 = tank mode
--- check is that <= this
-local PRIORITY = 3
-
 -- table of names -> bar colours (r,g,b)
 local names = {
-    ['Arcane Sentinel'] = {1,0,0},
+    ['Meredil Glider'] = {1,0,0},
     ['Duskwatch Battlemaster'] = {1,0,1},
 }
+
+-- comment out the next line (by adding two dashes at the start, like this) to
+-- disable target colouring:
+local COLOUR_TARGET = {.4,.8,.4}
+
+-- To overwrite tank mode, set this to 6
+-- To overwrite execute, set this to 5
+local PRIORITY = 3
 
 -- local functions #############################################################
 -- reimplemented locally in execute & tankmode
@@ -24,6 +27,8 @@ local function CanOverwriteHealthColor(f)
 end
 -- messages ####################################################################
 function mod:NameUpdate(frame)
+    if COLOUR_TARGET and frame.handler:IsTarget() then return end
+
     local col = frame.state.name and names[frame.state.name]
 
     if not col and frame.state.bar_is_name_coloured then
@@ -33,7 +38,7 @@ function mod:NameUpdate(frame)
             frame.state.health_colour_priority = nil
             frame.HealthBar:SetStatusBarColor(unpack(frame.state.healthColour))
         end
-    elseif col and not frame.state.bar_is_name_coloured then
+    elseif col then
         if CanOverwriteHealthColor(frame) then
             frame.state.bar_is_name_coloured = true
             frame.state.health_colour_priority = PRIORITY
@@ -45,9 +50,20 @@ end
 function mod:UNIT_NAME_UPDATE(event,frame)
     self:NameUpdate(frame)
 end
+function mod:GainedTarget(frame)
+    if not COLOUR_TARGET then return end
+    if CanOverwriteHealthColor(frame) then
+        frame.state.bar_is_name_coloured = true
+        frame.state.health_colour_priority = PRIORITY
+        frame.HealthBar:SetStatusBarColor(unpack(COLOUR_TARGET))
+    end
+end
 -- initialise ##################################################################
 function mod:Initialise()
     self:RegisterMessage('Show','NameUpdate')
     self:RegisterMessage('HealthColourChange','NameUpdate')
+    self:RegisterMessage('LostTarget','NameUpdate')
     self:RegisterUnitEvent('UNIT_NAME_UPDATE')
+
+    self:RegisterMessage('GainedTarget','TargetUpdate')
 end
