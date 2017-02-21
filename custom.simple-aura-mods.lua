@@ -1,11 +1,11 @@
 -- simple-ish modifications for auras
 -- configuration ###############################################################
 local CENTRE_CD_TEXT = true          -- move cooldown text to centre
-local AURA_TEXT_SIZE_MOD = 5         -- increase text size by 5 units
+--local AURA_TEXT_SIZE_MOD = 5       -- increase text size by 5 units
 
 -- changing cooldown text colour:
 local AURA_TEXT_COLOUR_S = {1,0,1}   -- short (<5s) (purple... technically)
-local AURA_TEXT_COLOUR_M = {.5,.5,1} -- medium (<20s) (light blue)
+local AURA_TEXT_COLOUR_M = {1,.8,1} -- medium (<20s) (bright pink)
 local AURA_TEXT_COLOUR_L = {1,1,1}   -- long (>20s) (white)
 
 -- comment out any of the above lines (like this - notice the two dashes at the
@@ -55,11 +55,11 @@ do
     end
 end
 
-local function PostCreateAuraButton(button)
+local function PostCreateAuraButton(frame,button)
     if CENTRE_CD_TEXT then
         -- centre cd text using the callback
         button.cd:ClearAllPoints()
-        button.cd:SetPoint('CENTER',0,core.profile.text_vertical_offset)
+        button.cd:SetPoint('CENTER',0,core.profile.text_vertical_offset+1)
     end
 
     if AURA_TEXT_COLOUR_S or AURA_TEXT_COLOUR_M or AURA_TEXT_COLOUR_L then
