@@ -12,22 +12,27 @@
 local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
-local mod = addon:NewPlugin('CustomInjector',101)
+local mod = addon:NewPlugin('LOSFader',101)
 local plugin_fading
 
 local function sizer_OnSizeChanged(self,x,y)
-    -- add LOS state when frames move
     if self.f.parent:IsShown() then
+        -- add LOS state
         if self.f.parent:GetAlpha() < .3 then
             self.f.state.LOS = nil
         else
             self.f.state.LOS = true
         end
-    end
 
-    -- calculate frame alpha upon moving
-    -- (this is the massively inefficient part)
-    plugin_fading:UpdateFrame(self.f)
+        if not self.f.state.was_LOS or
+           self.f.state.was_LOS ~= self.f.state.LOS
+        then
+            -- LOS state has changed,
+            -- calculate frame alpha upon moving
+            plugin_fading:UpdateFrame(self.f)
+            self.f.state.was_LOS = self.f.state.LOS
+        end
+    end
 end
 local function fading_FadeRulesReset()
     -- add LOS rule
