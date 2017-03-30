@@ -19,12 +19,12 @@ local function sizer_OnSizeChanged(self,x,y)
     if self.f.parent:IsShown() then
         -- add LOS state
         if self.f.parent:GetAlpha() < .3 then
-            self.f.state.LOS = nil
+            self.f.state.LOS = false
         else
             self.f.state.LOS = true
         end
 
-        if not self.f.state.was_LOS or
+        if self.f.state.was_LOS == nil or
            self.f.state.was_LOS ~= self.f.state.LOS
         then
             -- LOS state has changed,
