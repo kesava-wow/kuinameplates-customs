@@ -4,9 +4,6 @@ local addon = KuiNameplates
 local core = KuiNameplatesCore
 local mod = addon:NewPlugin('FelExplosives',101)
 
-local points = {
-    'TOP','BOTTOM','LEFT','RIGHT'
-}
 function mod:Create(f)
     local v = f:CreateTexture()
     v:SetTexture('interface/buttons/white8x8')
