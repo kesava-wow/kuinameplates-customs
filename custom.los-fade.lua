@@ -38,7 +38,7 @@ local function fading_FadeRulesReset()
     -- add LOS rule
     plugin_fading:AddFadeRule(function(f)
         return not f.state.LOS and 0
-    end,1)
+    end,21)
 end
 function mod:Create(frame)
     -- hook to frames' sizer
