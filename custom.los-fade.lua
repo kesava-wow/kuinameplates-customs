@@ -18,7 +18,7 @@ local plugin_fading
 local function sizer_OnSizeChanged(self,x,y)
     if self.f.parent:IsShown() then
         -- add LOS state
-        if self.f.parent:GetAlpha() < .3 then
+        if self.f.parent:GetAlpha() <= .4 then
             self.f.state.LOS = false
         else
             self.f.state.LOS = true
