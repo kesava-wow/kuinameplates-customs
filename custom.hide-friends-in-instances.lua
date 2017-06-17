@@ -14,7 +14,12 @@ local mod = addon:NewPlugin('HideFriendlyInInstances',101)
 
 local was_in_instance
 function mod:PLAYER_ENTERING_WORLD()
-    if IsInInstance() then
+    local in_instance,instance_type = IsInInstance()
+    if  in_instance and (
+        instance_type == 'party' or
+        instance_type == 'raid' or
+        instance_type == 'scenario')
+    then
         if not was_in_instance and
            not GetCVarBool('nameplateShowFriends')
         then
