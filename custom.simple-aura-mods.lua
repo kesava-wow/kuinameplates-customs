@@ -1,15 +1,22 @@
 -- simple-ish modifications for auras
 -- configuration ###############################################################
-local CENTRE_CD_TEXT = true          -- move cooldown text to centre
---local CD_TEXT_VERTICAL_OFFSET = 8  -- move cooldown text up by 8 pixels
---local AURA_TEXT_SIZE_MOD = 5       -- increase text size by 5 units
+--local AURAS_VERTICAL_OFFSET = -5    -- move aura frame down by 5 pixels
 
---local AURAS_VERTICAL_OFFSET = -5   -- move aura frame down by 5 pixels
+-- If you want to be able to modify CD text through OmniCC,
+-- uncomment both of these variables:
+local ADD_COOLDOWN_SPIRAL = true      -- add a cooldown spiral to icons
+--local HIDE_CD_TEXT = true           -- hide KNP's CD text
+
+-- Variables after this point obviously won't change anything if you've
+-- enabled "HIDE_CD_TEXT":
+local CENTRE_CD_TEXT = true           -- move cooldown text to centre
+--local CD_TEXT_VERTICAL_OFFSET = 8   -- move cooldown text up by 8 pixels
+--local AURA_TEXT_SIZE_MOD = 5        -- increase text size by 5 units
 
 -- changing cooldown text colour:
-local AURA_TEXT_COLOUR_S = {1,0,1}   -- short (<5s) (purple... technically)
-local AURA_TEXT_COLOUR_M = {1,.8,1}  -- medium (<20s) (bright pink)
-local AURA_TEXT_COLOUR_L = {1,1,1}   -- long (>20s) (white)
+--local AURA_TEXT_COLOUR_S = {1,0,1}  -- short (<5s) (purple... technically)
+--local AURA_TEXT_COLOUR_M = {1,.8,1} -- medium (<20s) (bright pink)
+--local AURA_TEXT_COLOUR_L = {1,1,1}  -- long (>20s) (white)
 
 -- delete or comment out any of the above lines (like this - notice the two
 -- dashes at the start) to disable the modification.
@@ -46,14 +53,31 @@ do
     end
 
     function button_UpdateCooldown(self,duration,expiration)
-        button_old_UpdateCooldown(self,duration,expiration)
+        if HIDE_CD_TEXT then
+            self.cd:Hide()
+        else
+            button_old_UpdateCooldown(self,duration,expiration)
 
-        if expiration and expiration > 0 then
-            if not old_ou then
-                old_ou = self:GetScript('OnUpdate')
+            if AURA_TEXT_COLOUR_S or AURA_TEXT_COLOUR_M or AURA_TEXT_COLOUR_L then
+                if expiration and expiration > 0 then
+                    if not old_ou then
+                        old_ou = self:GetScript('OnUpdate')
+                    end
+
+                    self:SetScript('OnUpdate',button_OnUpdate)
+                end
             end
+        end
 
-            self:SetScript('OnUpdate',button_OnUpdate)
+        if ADD_COOLDOWN_SPIRAL then
+            -- update cooldown spiral
+            if duration and expiration then
+                self.sam_cdf:SetCooldown(expiration-duration,duration)
+                self.sam_cdf:Show()
+            else
+                self.sam_cdf:SetCooldown(0,0)
+                self.sam_cdf:Hide()
+            end
         end
     end
 end
@@ -74,7 +98,28 @@ local function PostCreateAuraButton(frame,button)
         button.cd:SetPoint('TOPLEFT',-2,2+core.profile.text_vertical_offset+CD_TEXT_VERTICAL_OFFSET)
     end
 
-    if AURA_TEXT_COLOUR_S or AURA_TEXT_COLOUR_M or AURA_TEXT_COLOUR_L then
+    if ADD_COOLDOWN_SPIRAL then
+        -- name for OmniCC rule matching:
+        -- KuiNameplate%d+AuraButton%d+CDF
+        local cdf = CreateFrame('Cooldown',
+            button.parent.parent:GetName()..'AuraButton'..(#button.parent.buttons+1)..'CDF',
+            button,'CooldownFrameTemplate')
+        cdf:SetDrawBling(false)
+        cdf:SetReverse(true)
+        cdf:SetAllPoints(button)
+        button.sam_cdf = cdf
+
+        if not HIDE_CD_TEXT then
+            cdf:SetHideCountdownNumbers(true)
+            cdf.noCooldownCount = true
+        end
+
+        button.cd:SetParent(cdf)
+    end
+
+    if  AURA_TEXT_COLOUR_S or AURA_TEXT_COLOUR_M or AURA_TEXT_COLOUR_L or
+        ADD_COOLDOWN_SPIRAL
+    then
         -- modify text colour by "overloading" OnUpdate on visible buttons
         -- (ok, this one isn't so simple until i make this just use a variable)
         button_old_UpdateCooldown = button.UpdateCooldown
