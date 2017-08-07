@@ -21,7 +21,7 @@ local function ReplaceLevelText(f)
         end
     else
         local p = f.state.health_per
-        p = p < 1 and strformat('%.1f',p) or ceil(p)
+        p = p < 1 and string.format('%.1f',p) or ceil(p)
 
         -- override with current + percent
         f.HealthText:SetText(kui.num(f.state.health_cur)..' | '..p..(PERCENT_SYMBOL and '%' or ''))
