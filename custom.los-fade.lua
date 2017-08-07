@@ -16,6 +16,7 @@ local mod = addon:NewPlugin('LOSFader',101)
 local plugin_fading
 
 local function sizer_OnSizeChanged(self,x,y)
+    if not self then return end
     if self.f.parent:IsShown() then
         -- add LOS state
         if self.f.parent:GetAlpha() <= .4 then
@@ -47,6 +48,9 @@ function mod:Create(frame)
         sizer:HookScript('OnSizeChanged',sizer_OnSizeChanged)
     end
 end
+function mod:Show(frame)
+    sizer_OnSizeChanged(_G[frame:GetName()..'PositionHelper'])
+end
 function mod:Initialise()
     print('|cff9966ffKui Nameplates|r: |cffff6666You are using Kui_Nameplates_Custom which is not updated by the Curse package.|r If you experience errors, check the repository on GitHub for updates.')
 
@@ -55,4 +59,5 @@ function mod:Initialise()
     fading_FadeRulesReset()
 
     self:RegisterMessage('Create')
+    self:RegisterMessage('Show')
 end
