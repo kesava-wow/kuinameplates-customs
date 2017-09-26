@@ -8,7 +8,11 @@ local mod = addon:NewPlugin('ColourBarByName',101)
 -- table of names -> bar colours (r,g,b)
 local names = {
     ['Meredil Glider'] = {1,0,0},
-    ['Duskwatch Battlemaster'] = {1,0,1},
+    ['Fel Explosives'] = {1,0,1},
+}
+-- table of names -> frame alpha
+local names_fade = {
+    ['Fel Explosives'] = 1,
 }
 
 -- comment out the next line (by adding two dashes at the start, like this) to
@@ -26,10 +30,19 @@ local function CanOverwriteHealthColor(f)
            f.state.health_colour_priority <= PRIORITY
 end
 -- messages ####################################################################
+function mod.Fading_FadeRulesReset()
+    plugin_fading:AddFadeRule(function(f)
+        return f.state.name and names_fade[f.state.name]
+    end,1)
+end
 function mod:NameUpdate(frame)
     if COLOUR_TARGET and frame.handler:IsTarget() then return end
 
     local col = frame.state.name and names[frame.state.name]
+
+    if frame.state.name and names_fade[frame.state.name] then
+        plugin_fading:UpdateFrame(frame)
+    end
 
     if not col and frame.state.bar_is_name_coloured then
         frame.state.bar_is_name_coloured = nil
@@ -66,4 +79,9 @@ function mod:Initialise()
     self:RegisterUnitEvent('UNIT_NAME_UPDATE')
 
     self:RegisterMessage('GainedTarget','TargetUpdate')
+
+    plugin_fading = addon:GetPlugin('Fading')
+
+    self:AddCallback('Fading','FadeRulesReset',self.Fading_FadeRulesReset)
+    self.Fading_FadeRulesReset()
 end
