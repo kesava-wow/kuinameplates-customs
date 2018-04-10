@@ -42,8 +42,7 @@ local function UpdateNameText(f)
         end
 
         if ct then
-            local r,g,b = unpack(ct)
-            f.NameText:SetTextColor(r,g,b,1)
+            f.NameText:SetTextColor(unpack(ct))
         end
     end
 end
