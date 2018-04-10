@@ -44,7 +44,6 @@ local function UpdateNameText(f)
         if ct then
             local r,g,b = unpack(ct)
             f.NameText:SetTextColor(r,g,b,1)
-            f.GuildText:SetTextColor(min(1,r+.1),min(1,g+.1),min(1,b+.1),1)
         end
     end
 end
