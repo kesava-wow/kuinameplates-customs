@@ -5,32 +5,33 @@
 --   than "do nothing"
 -- * gets confused if another addon or bossmods toggles friendly nameplates
 --   (for whatever reason that might be)
--- * won't reset the cvar to the correct value if you reload the UI after it
---   disables friendlies (they'll stay disabled upon leaving the instance)
 local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 local mod = addon:NewPlugin('HideFriendlyInInstances',101)
 
-local was_in_instance
 function mod:PLAYER_ENTERING_WORLD()
+    local was_in_instance = KuiNameplatesCoreCharacterSaved.HideFriendlyInInstances_hidden
     local in_instance,instance_type = IsInInstance()
     if  in_instance and (
         instance_type == 'party' or
         instance_type == 'raid' or
         instance_type == 'scenario')
     then
+        -- in instance;
         if not was_in_instance and
            not GetCVarBool('nameplateShowFriends')
         then
+            -- don't do anything if they're already disabled
             return
         end
 
         SetCVar('nameplateShowFriends',false)
-        was_in_instance = true
+        KuiNameplatesCoreCharacterSaved.HideFriendlyInInstances_hidden = true
     elseif was_in_instance then
+        -- out of instance; unhide
         SetCVar('nameplateShowFriends',true)
-        was_in_instance = nil
+        KuiNameplatesCoreCharacterSaved.HideFriendlyInInstances_hidden = nil
     end
 end
 function mod:Initialise()
