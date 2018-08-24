@@ -17,6 +17,7 @@ if not mod then return end
 local plugin_fading
 local RULE_UID = 'los_fade'
 
+-- local functions #############################################################
 local function sizer_OnSizeChanged(self,x,y)
     if not self then return end
     if self.f.parent:IsShown() then
@@ -43,6 +44,26 @@ local function fading_FadeRulesReset()
         return not f.state.LOS and 0
     end,21,RULE_UID)
 end
+-- world entry alpha check loop ################################################
+local uf = CreateFrame('Frame')
+local uf_elapsed,uf_loop_world_entry = 0,0
+local function uf_OnUpdate(self,elap)
+    uf_elapsed = uf_elapsed + elap
+    if uf_elapsed > .1 then
+        uf_elapsed = 0
+
+        for k,f in addon:Frames() do
+            sizer_OnSizeChanged(_G[f:GetName()..'PositionHelper'])
+        end
+
+        uf_loop_world_entry = uf_loop_world_entry + 1
+        if uf_loop_world_entry > 2 then
+            uf_loop_world_entry = 0
+            self:SetScript('OnUpdate',nil)
+        end
+    end
+end
+-- messages ####################################################################
 function mod:Create(frame)
     -- hook to frames' sizer
     local sizer = _G[frame:GetName()..'PositionHelper']
@@ -51,12 +72,18 @@ function mod:Create(frame)
     end
 end
 function mod:Show(frame)
-    sizer_OnSizeChanged(_G[frame:GetName()..'PositionHelper'])
+    uf:SetScript('OnUpdate',uf_OnUpdate)
 end
+-- events ######################################################################
+function mod:PLAYER_ENTERING_WORLD()
+    uf:SetScript('OnUpdate',uf_OnUpdate)
+end
+-- initialise ##################################################################
 function mod:OnEnable()
     fading_FadeRulesReset()
     self:RegisterMessage('Create')
     self:RegisterMessage('Show')
+    self:RegisterEvent('PLAYER_ENTERING_WORLD')
 end
 function mod:Initialise()
     plugin_fading = addon:GetPlugin('Fading')
