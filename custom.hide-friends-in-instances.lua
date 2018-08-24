@@ -8,7 +8,9 @@
 local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
-local mod = addon:NewPlugin('HideFriendlyInInstances',101)
+
+local mod = addon:NewPlugin('HideFriendlyInInstances',101,3)
+if not mod then return end
 
 function mod:PLAYER_ENTERING_WORLD()
     local was_in_instance = KuiNameplatesCoreCharacterSaved.HideFriendlyInInstances_hidden
@@ -35,6 +37,5 @@ function mod:PLAYER_ENTERING_WORLD()
     end
 end
 function mod:Initialise()
-    print('|cff9966ffKui Nameplates|r: |cffff6666You are using Kui_Nameplates_Custom which is not updated by the Curse package.|r If you experience errors, check the repository on GitHub for updates.')
     self:RegisterEvent('PLAYER_ENTERING_WORLD')
 end

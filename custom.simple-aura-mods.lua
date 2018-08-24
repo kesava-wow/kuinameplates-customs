@@ -21,7 +21,9 @@ local COUNT_TEXT_SIZE_MOD = 0         -- modify count text size
 local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
-local mod = addon:NewPlugin('SimpleAuraMods',101)
+
+local mod = addon:NewPlugin('SimpleAuraMods',101,3)
+if not mod then return end
 
 local button_UpdateCooldown
 local function button_UpdateCooldown(self,duration,expiration)
@@ -97,8 +99,6 @@ function mod:Show(f)
 end
 
 function mod:Initialise()
-    print('|cff9966ffKui Nameplates|r: |cffff6666You are using Kui_Nameplates_Custom which is not updated by the Curse package.|r If you experience errors, check the repository on GitHub for updates.')
-
     self:AddCallback('Auras','PostCreateAuraButton',PostCreateAuraButton)
 
     if AURAS_VERTICAL_OFFSET then

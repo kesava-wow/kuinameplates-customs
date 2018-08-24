@@ -3,7 +3,9 @@
 local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
-local mod = addon:NewPlugin('TargetName',101)
+
+local mod = addon:NewPlugin('TargetName',101,3)
+if not mod then return end
 
 local UPDATE_INTERVAL = .1
 local interval = 0

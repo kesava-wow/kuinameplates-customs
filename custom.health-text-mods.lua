@@ -2,7 +2,9 @@ local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 local kui = LibStub('Kui-1.0')
-local mod = addon:NewPlugin('HealthTextMods',101)
+
+local mod = addon:NewPlugin('HealthTextMods',101,3)
+if not mod then return end
 
 -- (percent) show a percent symbol
 local PERCENT_SYMBOL = true
@@ -55,11 +57,6 @@ function mod:Create(f)
     f.UpdateHealthText = UpdateHealthText
 end
 function mod:Initialise()
-    if not KUINAMEPLATESCUSTOMWARNING then
-        KUINAMEPLATESCUSTOMWARNING = true
-        print('|cff9966ffKui Nameplates|r: |cffff6666You are using Kui_Nameplates_Custom which is not updated by the Curse package.|r If you experience errors, check the repository on GitHub for updates.')
-    end
-
     PERCENT_SYMBOL = PERCENT_SYMBOL and true or false
     DECIMAL_THRESHOLD = tonumber(DECIMAL_THRESHOLD)
     DECIMAL_PLACES = tonumber(DECIMAL_PLACES)

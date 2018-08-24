@@ -2,7 +2,9 @@ local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 local kui = LibStub('Kui-1.0')
-local mod = addon:NewPlugin('TwoHealthValues',101)
+
+local mod = addon:NewPlugin('TwoHealthValues',101,3)
+if not mod then return end
 
 -- replace level text instead of modifing health text?
 local REPLACE_LEVEL_TEXT = false
