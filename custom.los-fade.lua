@@ -1,6 +1,5 @@
 --[[
--- THIS IS PROBABLY NOT ALL THAT INEFFICIENT ANYMORE
--- IT MIGHT BE FINE TO USE IN RAIDS
+-- This is inefficient and may have a performance impact on slower PCs.
 --
 -- Fade out frames which are out of your characters line of sight,
 -- leaving their clickboxes and motion behaviour intact, as that can't be
