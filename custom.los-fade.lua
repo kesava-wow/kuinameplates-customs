@@ -13,6 +13,7 @@ local addon = KuiNameplates
 local core = KuiNameplatesCore
 local mod = addon:NewPlugin('LOSFader',101)
 local plugin_fading
+local RULE_UID = 'los_fade'
 
 local function sizer_OnSizeChanged(self,x,y)
     if not self then return end
@@ -38,7 +39,7 @@ local function fading_FadeRulesReset()
     -- add LOS rule
     plugin_fading:AddFadeRule(function(f)
         return not f.state.LOS and 0
-    end,21)
+    end,21,RULE_UID)
 end
 function mod:Create(frame)
     -- hook to frames' sizer
