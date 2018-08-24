@@ -51,13 +51,14 @@ end
 function mod:Show(frame)
     sizer_OnSizeChanged(_G[frame:GetName()..'PositionHelper'])
 end
+function mod:OnEnable()
+    fading_FadeRulesReset()
+    self:RegisterMessage('Create')
+    self:RegisterMessage('Show')
+end
 function mod:Initialise()
     print('|cff9966ffKui Nameplates|r: |cffff6666You are using Kui_Nameplates_Custom which is not updated by the Curse package.|r If you experience errors, check the repository on GitHub for updates.')
 
     plugin_fading = addon:GetPlugin('Fading')
     self:AddCallback('Fading','FadeRulesReset',fading_FadeRulesReset)
-    fading_FadeRulesReset()
-
-    self:RegisterMessage('Create')
-    self:RegisterMessage('Show')
 end
