@@ -8,10 +8,12 @@
 -- This relies on the CVar "nameplateOccludedAlphaMult" being set to 0.4 or
 -- lower, and "nameplateMinAlpha" being 0.3 or above. The defaults are fine.
 --]]
-local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
-local mod = addon:NewPlugin('LOSFader',101)
+
+local mod = addon:NewPlugin('LOSFader',101,3)
+if not mod then return end
+
 local plugin_fading
 local RULE_UID = 'los_fade'
 
@@ -57,8 +59,6 @@ function mod:OnEnable()
     self:RegisterMessage('Show')
 end
 function mod:Initialise()
-    print('|cff9966ffKui Nameplates|r: |cffff6666You are using Kui_Nameplates_Custom which is not updated by the Curse package.|r If you experience errors, check the repository on GitHub for updates.')
-
     plugin_fading = addon:GetPlugin('Fading')
     self:AddCallback('Fading','FadeRulesReset',fading_FadeRulesReset)
 end
