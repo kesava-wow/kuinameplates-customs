@@ -1,6 +1,5 @@
 -- simple-ish modifications for auras
 -- configuration ###############################################################
---local AURAS_VERTICAL_OFFSET = -5    -- move aura frame down by 5 pixels
 
 -- If you want to be able to modify CD text through OmniCC,
 -- uncomment both of these variables:
@@ -84,26 +83,8 @@ local function PostCreateAuraButton(frame,button)
     end
 end
 
-function mod:Show(f)
-    if AURAS_VERTICAL_OFFSET then
-        -- move aura frame whenever the nameplate is shown
-        -- we're executed after the layout, so this overrides the repositioning it
-        -- does when frames change sizes
-        local af = f.Auras.frames.core_dynamic
-        af:SetPoint(
-            'BOTTOMLEFT',f.bg,'TOPLEFT',
-            floor((f.bg:GetWidth() - af.__width) / 2),
-            15+AURAS_VERTICAL_OFFSET
-        )
-    end
-end
-
 function mod:Initialise()
     self:AddCallback('Auras','PostCreateAuraButton',PostCreateAuraButton)
-
-    if AURAS_VERTICAL_OFFSET then
-        self:RegisterMessage('Show')
-    end
 
     if CD_TEXT_SIZE_MOD or COUNT_TEXT_SIZE_MOD then
         -- modify text size by "overloading" the SetFont helper in core
