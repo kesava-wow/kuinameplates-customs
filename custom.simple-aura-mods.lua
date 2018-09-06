@@ -2,14 +2,12 @@
 -- configuration ###############################################################
 
 -- If you want to be able to modify CD text through OmniCC,
--- uncomment both of these variables:
+-- uncomment both of the following lines:
 --local ADD_COOLDOWN_SPIRAL = true    -- add a cooldown spiral to icons
 --local HIDE_CD_TEXT = true           -- hide KNP's CD text
 
--- Variables after this point obviously won't change anything if you've
--- enabled "HIDE_CD_TEXT":
---local CENTRE_CD_TEXT = true         -- move cooldown text to centre
---local CD_TEXT_VERTICAL_OFFSET = 8   -- move cooldown text up by 8 pixels
+-- Modifications after this line have no effect if "HIDE_CD_TEXT" is enabled:
+local CENTRE_CD_TEXT = true           -- move cooldown text to centre
 local CD_TEXT_SIZE_MOD = 2            -- modify cooldown text size
 local COUNT_TEXT_SIZE_MOD = 0         -- modify count text size
 
