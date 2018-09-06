@@ -14,6 +14,8 @@ local core = KuiNameplatesCore
 local mod = addon:NewPlugin('LOSFader',101,3)
 if not mod then return end
 
+local FADE_TO = 0.3
+
 local plugin_fading
 local RULE_UID = 'los_fade'
 
@@ -41,7 +43,7 @@ end
 local function fading_FadeRulesReset()
     -- add LOS rule
     plugin_fading:AddFadeRule(function(f)
-        return not f.state.LOS and 0
+        return not f.state.LOS and FADE_TO
     end,21,RULE_UID)
 end
 -- world entry alpha check loop ################################################
