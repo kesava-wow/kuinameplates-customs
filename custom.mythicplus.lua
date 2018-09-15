@@ -1,6 +1,6 @@
 -- UNTESTED
 -- some icons which are important for mythic+
--- (they should show up on the top left of nameplates)
+-- (they should show up on the top right of nameplates)
 local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
