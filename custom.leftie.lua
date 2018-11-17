@@ -1,7 +1,8 @@
 local addon = KuiNameplates
 local core = KuiNameplatesCore
-local extras = KuiNameplatesExtras
-local mod = addon:NewPlugin('Extras_Leftie',101)
+
+local mod = addon:NewPlugin('Leftie',101,4)
+if not mod then return end
 
 local orig_UpdateHealthText,
       orig_UpdateNameTextPosition,
@@ -10,7 +11,6 @@ local orig_UpdateHealthText,
 -- local functions #############################################################
 local function PostUpdateNameTextPosition(f,...)
     orig_UpdateNameTextPosition(f,...)
-    if not extras.profile.leftie then return end
 
     if f.IN_NAMEONLY then return end
 
@@ -26,7 +26,6 @@ local function PostUpdateNameTextPosition(f,...)
 end
 local function PostUpdateHealthText(f,...)
     orig_UpdateHealthText(f,...)
-    if not extras.profile.leftie then return end
 
     if not f.HealthText:IsShown() then return end
     if f.state.no_name then return end
@@ -37,7 +36,6 @@ local function PostUpdateHealthText(f,...)
 end
 local function PostUpdateSpellNamePosition(f,...)
     orig_UpdateSpellNamePosition(f,...)
-    if not extras.profile.leftie then return end
 
     f.SpellName:ClearAllPoints()
     f.SpellName:SetJustifyH('LEFT')
@@ -70,9 +68,6 @@ function mod:Create(f)
     end
 end
 -- register ####################################################################
-function mod:OnEnable()
-    self.enabled = extras.profile.leftie
-    if not self.enabled then return end
-
+function mod:Initialise()
     self:RegisterMessage('Create')
 end
