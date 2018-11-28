@@ -1,15 +1,13 @@
--- simple-ish modifications for auras
+-- README
+--
+-- By default, this enables OmniCC-like addons on aura buttons. There are
+--  rendering issues with aura cooldown frames, which is why it's not included
+--  in KNP.
+--
 -- configuration ###############################################################
 
--- If you want to be able to modify CD text through OmniCC,
--- uncomment both of the following lines:
---local ADD_COOLDOWN_SPIRAL = true    -- add a cooldown spiral to icons
---local HIDE_CD_TEXT = true           -- hide KNP's CD text
-
--- Modifications after this line have no effect if "HIDE_CD_TEXT" is enabled:
-local CENTRE_CD_TEXT = true           -- move cooldown text to centre
-local CD_TEXT_SIZE_MOD = 2            -- modify cooldown text size
-local COUNT_TEXT_SIZE_MOD = 0         -- modify count text size
+local ADD_COOLDOWN_SPIRAL = true -- add a cooldown spiral to icons
+local HIDE_CD_TEXT = true        -- hide KNP's CD text
 
 -- delete or comment out any of the above lines (like this - notice the two
 -- dashes at the start) to disable the modification.
@@ -43,21 +41,6 @@ local function button_UpdateCooldown(self,duration,expiration)
 end
 
 local function PostCreateAuraButton(frame,button)
-    if CENTRE_CD_TEXT then
-        -- centre cd text using the callback
-        button.cd:ClearAllPoints()
-
-        if CD_TEXT_VERTICAL_OFFSET then
-            button.cd:SetPoint('CENTER',0,core.profile.text_vertical_offset+CD_TEXT_VERTICAL_OFFSET+1)
-        else
-            button.cd:SetPoint('CENTER',0,core.profile.text_vertical_offset+1)
-        end
-    elseif CD_TEXT_VERTICAL_OFFSET then
-        -- move aura text using callback
-        button.cd:ClearAllPoints()
-        button.cd:SetPoint('TOPLEFT',-2,2+core.profile.text_vertical_offset+CD_TEXT_VERTICAL_OFFSET)
-    end
-
     if ADD_COOLDOWN_SPIRAL then
         -- name for OmniCC rule matching:
         -- KuiNameplate%d+AuraButton%d+CDF
@@ -83,18 +66,4 @@ end
 
 function mod:Initialise()
     self:AddCallback('Auras','PostCreateAuraButton',PostCreateAuraButton)
-
-    if CD_TEXT_SIZE_MOD or COUNT_TEXT_SIZE_MOD then
-        -- modify text size by "overloading" the SetFont helper in core
-        local old_sf = core.AurasButton_SetFont
-        core.AurasButton_SetFont = function(button)
-            old_sf(button)
-
-            local f,s,t = button.cd:GetFont()
-            button.cd:SetFont(f,s+CD_TEXT_SIZE_MOD,t)
-
-            f,s,t = button.count:GetFont()
-            button.count:SetFont(f,s+COUNT_TEXT_SIZE_MOD,t)
-        end
-    end
 end
