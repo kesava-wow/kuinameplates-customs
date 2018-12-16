@@ -5,7 +5,7 @@ local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 
-local mod = addon:NewPlugin('AvoidFadeHostile',101,3)
+local mod = addon:NewPlugin('AvoidFadeHostile',101,4)
 if not mod then return end
 
 local plugin_fading

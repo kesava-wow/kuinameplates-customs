@@ -1,11 +1,10 @@
--- UNTESTED
 -- some icons which are important for mythic+
 -- (they should show up on the top right of nameplates)
 local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 
-local mod = addon:NewPlugin('MythicAuras',101,3)
+local mod = addon:NewPlugin('MythicAuras',101,4)
 if not mod then return end
 
 function mod:Create(f)

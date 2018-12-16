@@ -4,7 +4,7 @@ local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 
-local mod = addon:NewPlugin('ColourBarByName',101,3)
+local mod = addon:NewPlugin('ColourBarByName',101,4)
 if not mod then return end
 
 -- table of names -> bar colours (r,g,b)
