@@ -1,4 +1,4 @@
-## Interface: 80000
+## Interface: 80100
 ## Author: Kesava
 ## Title: Kui |cff9966ffNameplates|r Old Textures
 ## Dependencies: Kui_Nameplates_Core
