@@ -7,6 +7,8 @@ local core = KuiNameplatesCore
 local mod = addon:NewPlugin('ColourBarByName',101,4)
 if not mod then return end
 
+local plugin_fading
+
 -- table of names -> bar colours (r,g,b)
 local names = {
     ['Meredil Glider'] = {1,0,0},
