@@ -1,6 +1,8 @@
 Kui_Nameplates_Customs
 ======================
-A collection of custom.lua scripts and patches for Kui_Nameplates_Core.
+A collection of custom scripts for Kui_Nameplates_Core, intended as templates for those who have some scripting knowledge and want to make simple changes.
+
+These need to be updated manually when a KNP update breaks them.
 
 Notable files
 -------------
