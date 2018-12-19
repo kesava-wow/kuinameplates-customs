@@ -11,7 +11,7 @@
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 
-local mod = addon:NewPlugin('LOSFader',101,3)
+local mod = addon:NewPlugin('LOSFader',101,4)
 if not mod then return end
 
 local FADE_TO = 0.3
@@ -55,7 +55,8 @@ local function uf_OnUpdate(self,elap)
         uf_elapsed = 0
 
         for k,f in addon:Frames() do
-            sizer_OnSizeChanged(_G[f:GetName()..'PositionHelper'])
+            -- force LOS updates on all frames
+            sizer_OnSizeChanged(f.LOSFade_Sizer)
         end
 
         uf_loop_world_entry = uf_loop_world_entry + 1
@@ -67,14 +68,20 @@ local function uf_OnUpdate(self,elap)
 end
 -- messages ####################################################################
 function mod:Create(frame)
-    -- hook to frames' sizer
-    local sizer = _G[frame:GetName()..'PositionHelper']
-    if sizer then
-        sizer:HookScript('OnSizeChanged',sizer_OnSizeChanged)
-    end
+    -- create a frame to monitor when nameplates move
+    local sizer = CreateFrame('Frame',frame:GetName()..'LOSFadeSizer',frame)
+    sizer:SetPoint('BOTTOMLEFT',WorldFrame)
+    sizer:SetPoint('TOPRIGHT',frame,'CENTER')
+    sizer:SetScript('OnSizeChanged',sizer_OnSizeChanged)
+    sizer.f = frame
+    frame.LOSFade_Sizer = sizer
 end
 function mod:Show(frame)
     uf:SetScript('OnUpdate',uf_OnUpdate)
+end
+function mod:LostTarget(frame)
+    -- target confuses us because it bumps the alpha up, so check again
+    sizer_OnSizeChanged(frame.LOSFade_Sizer)
 end
 -- events ######################################################################
 function mod:PLAYER_ENTERING_WORLD()
@@ -85,6 +92,7 @@ function mod:OnEnable()
     fading_FadeRulesReset()
     self:RegisterMessage('Create')
     self:RegisterMessage('Show')
+    self:RegisterMessage('LostTarget')
     self:RegisterEvent('PLAYER_ENTERING_WORLD')
 end
 function mod:Initialise()
