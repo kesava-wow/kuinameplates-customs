@@ -16,8 +16,11 @@ function mod:Create(f)
         rows = 1,
         filter = 'HELPFUL',
         whitelist = {
-            [226510] = true, -- sanguine
-            [277242] = true, -- symbiote of g'huun
+            [226510] = true, -- Mythic Plus Affix: Sanguine
+            [277242] = true, -- BfA Season 1: Symbiote of G'huun
+            [260805] = true, -- Waycrest Manor: Focusing Iris
+            [263246] = true, -- Temple of Sethralis: Lightning Shield
+            [257597] = true, -- MOTHERLODE: Azerite Infusion
         },
     })
     mythic:SetFrameLevel(0)
