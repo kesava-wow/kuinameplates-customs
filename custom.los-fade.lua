@@ -20,24 +20,18 @@ local plugin_fading
 local RULE_UID = 'los_fade'
 
 -- local functions #############################################################
-local function sizer_OnSizeChanged(self,x,y)
-    if not self then return end
-    if self.f.parent:IsShown() then
-        -- add LOS state
-        if self.f.parent:GetAlpha() <= .4 then
-            self.f.state.LOS = false
-        else
-            self.f.state.LOS = true
-        end
+local function sizer_OnSizeChanged(self)
+    if not self or not self:IsShown() then return end
 
-        if self.f.state.was_LOS == nil or
-           self.f.state.was_LOS ~= self.f.state.LOS
-        then
-            -- LOS state has changed,
-            -- calculate frame alpha upon moving
-            plugin_fading:UpdateFrame(self.f)
-            self.f.state.was_LOS = self.f.state.LOS
-        end
+    -- add LOS state
+    self.f.state.LOS = self.f.parent:GetAlpha() > .4
+
+    if self.f.state.was_LOS == nil or
+       self.f.state.was_LOS ~= self.f.state.LOS
+    then
+        -- LOS state changed
+        plugin_fading:UpdateFrame(self.f)
+        self.f.state.was_LOS = self.f.state.LOS
     end
 end
 local function fading_FadeRulesReset()
