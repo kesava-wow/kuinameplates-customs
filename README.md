@@ -16,7 +16,7 @@ How do I use this?
 
 ### If you don't know LUA
 1. Download [Kui_Nameplates_Custom.zip](https://github.com/kesava-wow/kuinameplates-customs/raw/master/Kui_Nameplates_Custom.zip) and install it like any other addon.
-    - By extracting the `Kui_Nameplates_Custom` folder into `World of Warcraft/Interface/AddOns`
+    - By extracting the `Kui_Nameplates_Custom` folder into `World of Warcraft/_retail_/Interface/AddOns`
 2. Click one of the custom.\*.lua files in the list above ("Save as" will NOT work for this link)
     - If you end up on a [page like this](https://github.com/kesava-wow/kuinameplates-customs/raw/master/virus-example.png), you can just save the page (CTRL+S).
     - If you end up on a GitHub webpage, [find this button](https://github.com/kesava-wow/kuinameplates-customs/raw/master/this-is-the-raw-link.png), right click it, and hit "Save as..." (or whatever equivalent there is in your browser).
