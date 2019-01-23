@@ -48,13 +48,22 @@ function mod:Create(f)
     f.feicon:Hide()
 end
 function mod:Show(f)
-    if f.state.name == 'Fel Explosives' then
+    if f.state.name == 'Explosives' then
         f.feicon:Show()
+    end
+end
+function mod:Hide(f)
+    f.feicon:Hide()
+end
+function mod:PLAYER_ENTERING_WORLD()
+    if IsInInstance() then
+        self:RegisterMessage('Show')
     else
-        f.feicon:Hide()
+        self:UnregisterMessage('Show')
     end
 end
 function mod:Initialise()
-    self:RegisterMessage('Show')
+    self:RegisterEvent('PLAYER_ENTERING_WORLD')
     self:RegisterMessage('Create')
+    self:RegisterMessage('Hide')
 end
