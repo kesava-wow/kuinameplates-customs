@@ -12,11 +12,11 @@ local plugin_fading
 -- table of names -> bar colours (r,g,b)
 local names = {
     ['Meredil Glider'] = {1,0,0},
-    ['Fel Explosives'] = {1,0,1},
+    ['Explosives'] = {1,0,1},
 }
 -- table of names -> frame alpha
 local names_fade = {
-    ['Fel Explosives'] = 1,
+    ['Explosives'] = 1,
 }
 
 -- comment out the next line (by adding two dashes at the start, like this) to
