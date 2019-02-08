@@ -19,9 +19,9 @@ local names_fade = {
     ['Explosives'] = 1,
 }
 
--- comment out the next line (by adding two dashes at the start, like this) to
--- disable target colouring:
-local COLOUR_TARGET = {.4,.8,.4}
+-- to enable target colouring,
+-- remove the two dashes at the start of the following line:
+--local COLOUR_TARGET = {.4,.8,.4}
 
 -- To overwrite tank mode, set this to 6
 -- To overwrite execute, set this to 5
