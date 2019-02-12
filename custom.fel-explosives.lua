@@ -1,3 +1,8 @@
+--
+-- adds a crosshair to explosives in M+
+--
+-- (zhTW translation needed)
+--
 local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
@@ -5,6 +10,7 @@ local core = KuiNameplatesCore
 local mod = addon:NewPlugin('FelExplosives',101,4)
 if not mod then return end
 
+local mob_name
 local function icon_Show(self)
     self.v:Show()
     self.h:Show()
@@ -48,7 +54,7 @@ function mod:Create(f)
     f.feicon:Hide()
 end
 function mod:Show(f)
-    if f.state.name == 'Explosives' then
+    if f.state.name == mob_name then
         f.feicon:Show()
     end
 end
@@ -66,4 +72,18 @@ function mod:Initialise()
     self:RegisterEvent('PLAYER_ENTERING_WORLD')
     self:RegisterMessage('Create')
     self:RegisterMessage('Hide')
+
+    local locale = GetLocale()
+    local names = {
+        deDE = 'Sprengstoff',
+        enUS = 'Explosives',
+        esMX = 'Explosivos',
+        frFR = 'Explosifs',
+        itIT = 'Esplosivi',
+        ptBR = 'Explosivos',
+        ruRU = 'Взрывчатка',
+        koKR = '폭발물',
+        zhCN = '爆炸物',
+    }
+    mob_name = (locale and names[locale]) or names.enUS
 end
