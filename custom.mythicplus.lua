@@ -21,6 +21,7 @@ function mod:Create(f)
             [260805] = true, -- Waycrest Manor: Focusing Iris
             [263246] = true, -- Temple of Sethralis: Lightning Shield
             [257597] = true, -- MOTHERLODE: Azerite Infusion
+            [209859] = true, -- Mythic Plus Affix: Bolstering
         },
     })
     mythic:SetFrameLevel(0)
