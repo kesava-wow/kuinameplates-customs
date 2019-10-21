@@ -1,7 +1,7 @@
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 
-local mod = addon:NewPlugin('Leftie',104,4)
+local mod = addon:NewPlugin('Leftie',104,5)
 if not mod then return end
 
 -- local functions #############################################################

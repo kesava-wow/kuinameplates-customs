@@ -3,7 +3,7 @@ local addon = KuiNameplates
 local core = KuiNameplatesCore
 local kui = LibStub('Kui-1.0')
 
-local mod = addon:NewPlugin('TwoHealthValues',101,4)
+local mod = addon:NewPlugin('TwoHealthValues',101,5)
 if not mod then return end
 
 -- replace level text instead of modifying health text?

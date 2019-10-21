@@ -3,7 +3,7 @@ local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 
-local mod = addon:NewPlugin('TargetScale',101,4)
+local mod = addon:NewPlugin('TargetScale',101,5)
 if not mod then return end
 
 local SCALE_FACTOR = 1.5

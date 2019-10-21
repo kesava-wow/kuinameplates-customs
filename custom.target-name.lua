@@ -5,7 +5,7 @@ local addon = KuiNameplates
 local core = KuiNameplatesCore
 local kui = LibStub('Kui-1.0')
 
-local mod = addon:NewPlugin('TargetName',101,4)
+local mod = addon:NewPlugin('TargetName',101,5)
 if not mod then return end
 
 local UPDATE_INTERVAL = .25

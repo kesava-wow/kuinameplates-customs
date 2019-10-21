@@ -4,7 +4,7 @@ local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 
-local mod = addon:NewPlugin('ColourBarByName',101,4)
+local mod = addon:NewPlugin('ColourBarByName',101,5)
 if not mod then return end
 
 local plugin_fading

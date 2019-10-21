@@ -2,7 +2,7 @@ local folder,ns=...
 local addon = KuiNameplates
 local core = KuiNameplatesCore
 
-local mod = addon:NewPlugin('DetectionIcon',101,4)
+local mod = addon:NewPlugin('DetectionIcon',101,5)
 if not mod then return end
 
 function mod:Create(f)
