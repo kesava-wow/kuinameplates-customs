@@ -22,9 +22,9 @@ local function update_frame_OnUpdate(self,elap)
 
         for _,f in addon:Frames() do
             if f:IsShown() and f.unit then
-                local name = UnitName(f.unit..'target')
-                if name ~= f.state.target_name then
-                    f.state.target_name = name
+                local guid = UnitGUID(f.unit..'target')
+                if guid ~= f.state.target_guid then
+                    f.state.target_guid = guid
                     addon:DispatchMessage('TargetChanged',f)
                 end
             end
@@ -42,12 +42,12 @@ function mod:Create(frame)
 end
 function mod:TargetChanged(frame)
     if frame.state.personal then return end
-    if frame.state.target_name then
-        if frame.state.target_name == UnitName('player') then
+    if frame.state.target_guid then
+        if UnitIsUnit(frame.unit..'target','player') then
             frame.TargetName:SetText('You')
             frame.TargetName:SetTextColor(1,.1,.1)
         else
-            frame.TargetName:SetText(frame.state.target_name)
+            frame.TargetName:SetText(UnitName(frame.unit..'target'))
             frame.TargetName:SetTextColor(kui.GetUnitColour(frame.unit..'target',2))
         end
         frame.TargetName:Show()
