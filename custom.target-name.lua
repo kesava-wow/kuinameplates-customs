@@ -58,8 +58,8 @@ end
 function mod:Show(frame)
     local font,_,flags = frame.NameText:GetFont()
     frame.TargetName:SetFont(font,core.profile.font_size_small,flags)
-
-    frame.state.target_name = UnitName(frame.unit..'target')
+    
+    frame.state.target_guid = UnitGUID(frame.unit..'target')
     self:TargetChanged(frame)
 end
 function mod:Hide(frame)
