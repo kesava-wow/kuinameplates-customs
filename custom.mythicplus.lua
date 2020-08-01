@@ -59,6 +59,7 @@ function mod:Create(f)
             [226510] = true, -- Mythic Plus Affix: Sanguine
             [277242] = true, -- BfA Season 1: Symbiote of G'huun
             [260805] = true, -- Waycrest Manor: Focusing Iris
+            [264027] = true, -- Waycrest Manor: Warding Candles
             [263246] = true, -- Temple of Sethralis: Lightning Shield
             [257597] = true, -- MOTHERLODE: Azerite Infusion
         },
