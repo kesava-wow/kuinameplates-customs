@@ -3,11 +3,8 @@
 --
 -- (zhTW translation needed)
 --
-local folder,ns=...
 local addon = KuiNameplates
-local core = KuiNameplatesCore
-
-local mod = addon:NewPlugin('FelExplosives',101,5)
+local mod = addon:NewPlugin('Custom_Explosives',101,5)
 if not mod then return end
 
 local mob_name
@@ -54,23 +51,33 @@ function mod:Create(f)
     f.feicon:Hide()
 end
 function mod:Show(f)
-    if f.state.name == mob_name then
-        f.feicon:Show()
+    if f.state.name ~= mob_name then return end
+    if not f.feicon then
+        self:Create(f)
     end
+    f.feicon:Show()
 end
 function mod:Hide(f)
-    f.feicon:Hide()
+    if f.feicon then
+        f.feicon:Hide()
+    end
 end
 function mod:PLAYER_ENTERING_WORLD()
     if IsInInstance() then
-        self:RegisterMessage('Show')
-    else
-        self:UnregisterMessage('Show')
+        local instance_type,difficulty = select(2,GetInstanceInfo())
+        if instance_type == 'party' then
+            local show_mythic = select(6,GetDifficultyInfo(difficulty))
+            if show_mythic then
+                self:RegisterMessage('Show')
+                return
+            end
+        end
     end
+    self:UnregisterMessage('Show')
 end
 function mod:Initialise()
     self:RegisterEvent('PLAYER_ENTERING_WORLD')
-    self:RegisterMessage('Create')
+    self:RegisterEvent('UPDATE_INSTANCE_INFO','PLAYER_ENTERING_WORLD')
     self:RegisterMessage('Hide')
 
     local locale = GetLocale()
