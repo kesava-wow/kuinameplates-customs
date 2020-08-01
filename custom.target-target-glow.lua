@@ -53,6 +53,7 @@ function mod:TargetUpdate(frame)
 end
 -- initialise ##################################################################
 function mod:OnEnable()
+    if core.CREATE2 then return end
     self:RegisterEvent('UNIT_TARGET')
     self:RegisterMessage('Create')
     self:RegisterMessage('GainedTarget','TargetUpdate')
