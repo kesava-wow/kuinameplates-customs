@@ -19,7 +19,7 @@ How do I use this?
 To use more than one at a time:
 ---
 
-1. Download just lua file you want into the `Interface/AddOns/Kui_Nameplates_Custom` folder you already created.
+1. Download the lua file you want into the `Interface/AddOns/Kui_Nameplates_Custom` folder you already created.
 2. Open the `Kui_Nameplates_Custom.toc` file with a plaintext editor (like notepad).
 3. Add the name of the new lua file to the end of the toc file, on its own line, after the `custom.lua` line.
 4. Relaunch WoW.
